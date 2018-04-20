@@ -1,21 +1,19 @@
-
 // Dependencies
 var express = require("express");
 var router = express.Router();
 var expressHandlebars = require("express-handlebars");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-// var mongojs = require("mongojs");
 
-// Request and Cheerio makes the scraping possible
+// Npm packages request and cheerio make the scraping possible.
+
 // Make HTTP request for HTML page
 var request = require("request");
-
 // Parse HTML and find elements
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-var axios = require("axios");
 var cheerio = require("cheerio");
+
+// Axios is a promised-based http library, similar to jQuery's Ajax method. It works on the client and on the server.
+var axios = require("axios");
 
 // Initialize Express
 var app = express();
@@ -23,16 +21,13 @@ var app = express();
 // Require all models
 var db = require("./models");
 
-// Set Handlebars.
+// Set handlebars
 var exphbs = require("express-handlebars");
-
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
-
-
 
 // Connect to the Mongo DB
 
@@ -40,16 +35,10 @@ app.use(express.static("public"));
 // ---------------------------------------------------------------------------------------------------------------
 // Connect to localhost if not a production environment
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
+console.log(MONGODB_URI);
 
-// if(process.env.NODE_ENV == 'production'){
-//   mongoose.connect('mongodb://heroku_60zpcwg0:ubn0n27pi2856flqoedo9glvh8@ds119578.mlab.com:19578/heroku_60zpcwg0');
-// }
-// else{
- mongoose.connect(MONGODB_URI);
- // YOU CAN IGNORE THE CONNECTION URL BELOW (LINE 41) THAT WAS JUST FOR DELETING STUFF ON A RE-DEPLOYMENT
- //mongoose.connect('mongodb://heroku_60zpcwg0:ubn0n27pi2856flqoedo9glvh8@ds119578.mlab.com:19578/heroku_60zpcwg0');
-// }
-
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // // Route 1: Retrieve the data from the scrapedData collection as a json
 // app.get("/all", function (req, res) {
@@ -62,6 +51,15 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
 //     }
 //   });
 // });
+
+// TODO - text with this note from Jeff
+axios.get("http://foo.com")
+  .then(function(html) {
+    // do stuff
+  })
+  .catch(function(err) {
+	console.error(err);
+  });
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
