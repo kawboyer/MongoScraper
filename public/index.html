@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Scraping With Mongoose</title>
-    <style>
-      body { background-color: #F2F6D0 }
-      #wrapper {
-        width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
-      }
-      #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
-      <div id="articles"></div>
-      <div id="notes"></div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="app.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MongoScraper</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Bulma Fint Awesome Icons -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>  
+</head>
+
+<body>
+  <div class="wrapper">
+    <section class="hero is-info">
+      <div class="hero-head">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="container">
+            <div class="navbar-brand">
+              <a href="/" class="navbar-item">
+                <h1>Mongo Scraper</h1>
+              </a>
+            </div>
+
+            <div class="navbar-start">
+              <a class="navbar-item" href="https://bulma.io/">
+                Home
+              </a>
+              <a class="navbar-item" href="https://bulma.io/">
+                Saved Articles
+              </a>
+              <a class="button is-danger center-text" href="">
+                <span>
+                  SCRAPE NEW ARTICLES!
+                </span>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="hero hero-body container" style="background: url('assets/images/the-new-york-times.jpg') no-repeat;">
+        <div class="container has-text-centered is-overlay">
+
+            <h1 class="title">MONGO SCRAPER</h1>
+            <h3 class="subtitle">NEW YORK TIMES EDITION</h3>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div id="articles"></div>
+    <div id="notes"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+  <script src="./assets"></script>
+</body>
+
+
 </html>

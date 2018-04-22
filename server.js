@@ -36,40 +36,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB or localhost 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
-console.log(MONGODB_URI);
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_j33rr0db:bdruofjsh6fr9qtdce6umsee4v@ds147589.mlab.com:47589/heroku_j33rr0db"
+console.log("This is the MONGODB_URI: " + MONGODB_URI);
 
 // Database Configuration with Mongoose
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// // TODO
-// axios.get("http://foo.com")
-//   .then(function(html) {
-//     // do stuff
-//   })
-//   .catch(function(err) {
-// 	console.error(err);
-//   });
-
-// A GET route for scraping the New York Times website
+// A GET route for scraping the New York Times website.
 app.get("/scrape", function (req, res) {
   console.log("Hi this is a scrape");
-  // First, we grab the body of the html with request
+  // 1. Grab the body of the html with request.
   axios.get("https://www.nytimes.com/").then(function (response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    // Load that into cheerio and save it to $ for a shorthand selector.
     var $ = cheerio.load(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
+    // 2. Grab every h2 within an article tag.
     $("h2.story-heading").each(function (i, element) {
-      // Save an empty result object
+      // Save an empty result object.
       var result = {};
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .text();
-      // result.summary = $(this)
-
+      // Add the text and href of every link, and save them as properties of the result object.
       result.link = $(this)
         .children("a")
         .attr("href");
