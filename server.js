@@ -4,6 +4,7 @@ var expressHandlebars = require("express-handlebars");
 var mongoose = require("mongoose");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
+var scraper = require("./controller/scraper.js");
 
 // Request and cheerio make the scraping possible.
 var request = require("request");
@@ -21,6 +22,9 @@ var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 
+// Pass the scraper.js file
+app.use("/", scraper);
+
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 
@@ -30,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Use express.static to serve the public folder as a static directory
-app.use(express.static("views"));
+app.use(express.static("public"));
 
 // Connect to the Mongo DB or localhost 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_j33rr0db:bdruofjsh6fr9qtdce6umsee4v@ds147589.mlab.com:47589/heroku_j33rr0db"
@@ -39,8 +43,6 @@ console.log("This is the MONGODB_URI: " + MONGODB_URI);
 // Database Configuration with Mongoose
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
-
-var scraper = require("./controller/scraper.js")
 
 // Start the server
 app.listen(PORT, function () {

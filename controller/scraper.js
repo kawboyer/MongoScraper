@@ -9,7 +9,7 @@ var path = require("path");
 
 // HTML Route loads index.html
 router.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "./views/index.html"));
+  res.sendFile(path.join(__dirname, "../public", "/views/index.html"));
 });
 
 // A GET route for scraping the New York Times website.
@@ -115,3 +115,5 @@ router.get("/articles/comments", function(req, res) {
       res.json(err);
     });
 });
+
+module.exports = router;
