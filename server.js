@@ -38,10 +38,6 @@ app.use("/", scraper);
 
 // Connect to the Mongo DB or localhost 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
-console.log("This is the MONGODB_URI: " + MONGODB_URI);
-
-// heroku_j33rr0db:bdruofjsh6fr9qtdce6umsee4v@ds147589.mlab.com:47589
-// heroku_j33rr0db
 
 // Database Configuration with Mongoose
 mongoose.Promise = Promise;
