@@ -1,44 +1,44 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Grab the articles as a json
-  $.getJSON("/articles", function(data) {
+  $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<div class='panel $panel-item-border'>" + "<div class='panel-heading' data-id=' " + data[i]._id + " ' " + data[i].summary + "</div>");
+      $("#articles").append("<div class='panel $panel-item-border'>" + "<div class='panel-heading' data-id=' " + data[i]._id + " '> " + data[i].link + "</div>");
     }
   });
 
-  // Now make an ajax call for the Article
-  $.ajax({
-    method: "GET",
-    url: "/article/" + thisId
-  })
-    // With that done, add the comment information to the page
-    .done(function(data) {
-      $('.commentTitle').text(data.headLine);
-      if (data.comment.length===0) {
-        $(".comments").append("<h5>Article has no comments!</h5>");
-      } 
-      else {
-        $(".comments").append("<h5>Saved comments</h5>");
-        data.comment.forEach(function(item){
-          // The title of the article
-          $(".comments").append("<p><strong>Title: </strong>" + item.title + " <button data-id='"+item._id+"'class='btn btn-dark delcomment float-right'><i class='fa fa-trash-o' aria-hidden='true'></i></button><br>"+ item.body+"</p>");
-        });
-        }  
+  // // Now make an ajax call for the Article
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/article/" + thisId
+  // })
+  //   // With that done, add the comment information to the page
+  //   .done(function(data) {
+  //     $('.commentTitle').text(data.headLine);
+  //     if (data.comment.length===0) {
+  //       $(".comments").append("<h5>Article has no comments!</h5>");
+  //     } 
+  //     else {
+  //       $(".comments").append("<h5>Saved comments</h5>");
+  //       data.comment.forEach(function(item){
+  //         // The title of the article
+  //         $(".comments").append("<p><strong>Title: </strong>" + item.title + " <button data-id='"+item._id+"'class='btn btn-dark delcomment float-right'><i class='fa fa-trash-o' aria-hidden='true'></i></button><br>"+ item.body+"</p>");
+  //       });
+  //       }  
 
-      // An input to enter a new title
-        $(".commentPad").append("<h5>Add comment</h5><input id='titleinput' name='title' class='mb-3 form-control'><br>");
-        // A textarea to add a new comment body
-        $(".commentPad").append("<textarea class='form-control' id='bodyinput' name='body'></textarea><br>");
-        // A button to submit a new comment, with the id of the article saved to it
-        $(".commentPad").append("<button class='btn btn-dark mt-3' data-id='" + data._id + "' id='savecomment'>Save comment</button>");
+  //     // An input to enter a new title
+  //       $(".commentPad").append("<h5>Add comment</h5><input id='titleinput' name='title' class='mb-3 form-control'><br>");
+  //       // A textarea to add a new comment body
+  //       $(".commentPad").append("<textarea class='form-control' id='bodyinput' name='body'></textarea><br>");
+  //       // A button to submit a new comment, with the id of the article saved to it
+  //       $(".commentPad").append("<button class='btn btn-dark mt-3' data-id='" + data._id + "' id='savecomment'>Save comment</button>");
 
-    });
-  });
+  //   });
+  // });
 
   // Whenever someone clicks a p tag
-  $(document).on("click", "p", function() {
+  $(document).on("click", "p", function () {
     // Empty the comments from the comment section
     $("#comments").empty();
     // Save the id from the p tag
@@ -50,7 +50,7 @@ $(document).ready(function() {
       url: "/articles/" + thisId
     })
       // With that done, add the comment information to the page
-      .then(function(data) {
+      .then(function (data) {
         console.log(data);
         // The title of the article
         $("#comments").append("<h2>" + data.title + "</h2>");
@@ -72,7 +72,7 @@ $(document).ready(function() {
   });
 
   // When you click the savecomment button
-  $(document).on("click", "#savecomment", function() {
+  $(document).on("click", "#savecomment", function () {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
 
@@ -88,7 +88,7 @@ $(document).ready(function() {
       }
     })
       // With that done
-      .then(function(data) {
+      .then(function (data) {
         // Log the response
         console.log(data);
         // Empty the comments section
@@ -100,12 +100,13 @@ $(document).ready(function() {
     $("#bodyinput").val("");
   });
 
-  $(document).on("click", "#addcomment", function() {
-  $('.commentTitle').text('Article comments');
-  $('.commentPad').empty();
-  $('.comments').empty();
-  $('.commentModal').modal('toggle');
+  $(document).on("click", "#addcomment", function () {
+    $('.commentTitle').text('Article comments');
+    $('.commentPad').empty();
+    $('.comments').empty();
+    $('.commentModal').modal('toggle');
 
-  // Save the id from the button tag
-  var thisId = $(this).attr("data-id");
+    // Save the id from the button tag
+    var thisId = $(this).attr("data-id");
+  });
 });

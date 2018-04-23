@@ -22,9 +22,6 @@ var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 
-// Pass the scraper.js file
-app.use("/", scraper);
-
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 
@@ -36,9 +33,15 @@ app.use(bodyParser.json());
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
+// Pass the scraper.js file
+app.use("/", scraper);
+
 // Connect to the Mongo DB or localhost 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_j33rr0db:bdruofjsh6fr9qtdce6umsee4v@ds147589.mlab.com:47589/heroku_j33rr0db"
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper"
 console.log("This is the MONGODB_URI: " + MONGODB_URI);
+
+// heroku_j33rr0db:bdruofjsh6fr9qtdce6umsee4v@ds147589.mlab.com:47589
+// heroku_j33rr0db
 
 // Database Configuration with Mongoose
 mongoose.Promise = Promise;

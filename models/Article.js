@@ -9,7 +9,7 @@ var ArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    required: true
+    required: false
   },
   // `link` is required and of type String
   link: {
@@ -18,7 +18,7 @@ var ArticleSchema = new Schema({
   },
   summary: {
     type: String,
-    required: true
+    required: false
   },
   // `comment` is an object that stores a Comment id
   // The ref property links the ObjectId to the Comment model

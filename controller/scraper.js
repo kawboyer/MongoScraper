@@ -29,7 +29,8 @@ router.get("/scrape", function (req, res) {
       result.link = $(this)
         .children("a")
         .attr("href");
-        //console.log(result)
+        // console.log("============================================")
+        // console.log(result)
 
       // Create a new Article using the "result" object built from scraping
       db.Article.create(result)
@@ -39,9 +40,10 @@ router.get("/scrape", function (req, res) {
         })
         .catch(function (err) {
           // If an error occurred, send it to the client
-          return res.json(err);
+          console.log(err);
+          // return res.json(err);
         });
-      console.log(result)
+      // console.log(result)
     });
 
     // If the scrape was successful, save an Article and send a message to the client.
@@ -60,7 +62,8 @@ router.get('/articles', function (request, response) {
     })
     .catch(function(err) {
       // If an error occurred, let the client know
-      response.json(err);
+      console.log(err);
+      // response.json(err);
     });
 });
 
